@@ -9,24 +9,8 @@ const Layout = ({ children, params, location }) => (
     <nav className="navbar navbar-default">
       <div className="container">
         <div className="navbar-header">
-          <Link className="navbar-brand" to="/">SharedApp</Link>
+          <Link className="navbar-brand" to="/">Selfl.us</Link>
         </div>
-
-        <ul className="nav navbar-nav">
-          <NavbarLink
-            title="Counter"
-            href="/localCounter"
-            active={location.pathname.indexOf('localCounter') !== -1}
-          />
-        </ul>
-
-        <ul className="nav navbar-nav">
-          <NavbarLink
-            title="Counter2"
-            href="/remoteCounter"
-            active={location.pathname.indexOf('remoteCounter') !== -1}
-          />
-        </ul>
 
         <ul className="nav navbar-nav">
           <NavbarLink

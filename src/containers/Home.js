@@ -12,16 +12,13 @@ export default class Index extends React.Component {
     return (
       <Row>
         <Col md={6}>
-          <h2>Welcome to my demo app.</h2>
-          <h3>Check out these links</h3>
+          <h2>Welcome to Selfl.us.</h2>
           <ul>
-            <li><Link to="/localCounter">Counter</Link></li>
             <li><Link to="/about">About</Link></li>
+            <li><Link to="/users">Search Users</Link></li>
           </ul>
         </Col>
       </Row>
     )
   }
 }
-
-

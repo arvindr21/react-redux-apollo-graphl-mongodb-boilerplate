@@ -12,20 +12,12 @@ class Users extends Component {
     super(args)
   }
 
-  // componentWillMount() {
-  //   this.props.fetchUsers();
-  // }
-
-  componentDidMount() {
-    console.log('didMount:props: ', this.props)
-  }
-
   componentWillReceiveProps(nextProps) {
-    console.log('nextprops:', nextProps)
+
   }
 
   render() {
-    const {loading, users} = this.props
+    const { loading, users } = this.props
 
     if (loading) {
       return (
@@ -40,7 +32,7 @@ class Users extends Component {
         <ul>
           {users.map(u => {
             return (
-              <li>
+              <li key={u._id}>
                 {u.username}
               </li>
             )
@@ -56,15 +48,6 @@ Users.propTypes = {
   users: PropTypes.array
 }
 
-
-// const UsersQuery = gql`
-//   query UsersQuery {
-//     users {
-//       _id
-//       username
-//     }
-//   }
-// `
 export default compose(
   graphql(USERS_QUERY, {
     props({ data: { loading, users } }) {
@@ -72,7 +55,3 @@ export default compose(
     }
   })
 )(Users)
-
-// const UsersWithData = graphql(UsersQuery)(Users)
-//
-// export default Users
