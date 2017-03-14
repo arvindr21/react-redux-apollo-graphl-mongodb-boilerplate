@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import NavbarLink from './NavbarLink';
 
 @connect(
     state=>({
@@ -13,28 +14,39 @@ export default class Profile extends Component {
 
   render() {
     let { loading, currentUser } = this.props;
-      if (loading) {
-          return (
-              <p className="navbar-text navbar-right">
-              Loading...
-              </p>
-      );
-      } else if (currentUser) {
-          return (
-              <span>
-              <p className="navbar-text navbar-right">
-              Logged as {currentUser.username}
-      &nbsp;&nbsp;
-      <Link to="/logout">Log out</Link>
-          </p>
-          </span>
-      );
-      }
+
+    if (loading) {
       return (
+        <p className="navbar-text navbar-right">
+          Loading...
+        </p>
+      );
+    } else if (currentUser) {
+      return (
+        <span>
           <p className="navbar-text navbar-right">
-          <Link to="/login">Log in</Link>
+            {currentUser.username}
+            &nbsp;&nbsp;
+            <Link to="/logout">Log out</Link>
           </p>
-  );
+        </span>
+      );
+    }
+
+    return (
+      <ul className="nav navbar-nav navbar-right">
+        <NavbarLink
+          title="Sign In"
+          href="/login"
+          active={location.pathname.indexOf('login') !== -1}
+        />
+        <NavbarLink
+          title="Sign Up"
+          href="/signup"
+          active={location.pathname.indexOf('signup') !== -1}
+        />
+      </ul>
+    );
   }
 }
 

@@ -10,10 +10,14 @@ type Count {
   amount: Int!
 }
 
+type User {
+  _id: ID!
+  username: String
+}
+
 type Query {
   # Counter
-  count: Count
-  
+  users: [User]
 }
 
 type Mutation {
@@ -31,8 +35,8 @@ type Subscription {
 
 schema {
   query: Query
-  mutation: Mutation
-  subscription: Subscription
+  #mutation: Mutation
+  #subscription: Subscription
 }
 
 `];
@@ -40,25 +44,28 @@ schema {
 
 const rootResolvers = {
     Query: {
-        count(ignored1, ignored2, context) {
-            return context.counterService.getCount();
-        },
+      // count(ignored1, ignored2, context) {
+      //     return context.counterService.getCount();
+      // },
+      users(ignored1, ignored2, context) {
+        return context.usersService.allUsers()
+      }
     },
-    Mutation: {
-        addCount(_, { amount }, context) {
-            return context.counterService.addCount(amount)
-                    .then(() => context.counterService.getCount())
-        .then(count => {
-                pubsub.publish('countUpdated', count);
-            return count;
-        });
-        },
-    },
-    Subscription: {
-        countUpdated(amount) {
-            return amount;
-        }
-    }
+    // Mutation: {
+    //     addCount(_, { amount }, context) {
+    //         return context.counterService.addCount(amount)
+    //                 .then(() => context.counterService.getCount())
+    //     .then(count => {
+    //             pubsub.publish('countUpdated', count);
+    //         return count;
+    //     });
+    //     },
+    // },
+    // Subscription: {
+    //     countUpdated(amount) {
+    //         return amount;
+    //     }
+    // }
 };
 
 

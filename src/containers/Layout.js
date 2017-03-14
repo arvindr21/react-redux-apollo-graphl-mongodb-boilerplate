@@ -36,6 +36,14 @@ const Layout = ({ children, params, location }) => (
           />
         </ul>
 
+        <ul className="nav navbar-nav">
+          <NavbarLink
+            title="Users"
+            href="/users"
+            active={location.pathname.indexOf('users') !== -1}
+          />
+        </ul>
+
         <Profile />
       </div>
     </nav>

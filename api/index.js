@@ -9,6 +9,7 @@ import passport from 'passport';
 
 import schema from './schema';
 import * as CounterService from './services/countService'
+import * as UsersService from './services/usersService'
 import { setupLocalLogin } from './localLogin'
 
 require('dotenv').config();
@@ -27,12 +28,12 @@ app.use('/graphql', passport.authenticate('jwt', {session: false}), graphqlExpre
   if (query && query.length > 2000) {
     throw new Error('Query too large.');
   }
-
   return {
     schema,
     context: {
       user: req.user,
-      counterService: CounterService
+      counterService: CounterService,
+      usersService: UsersService
     },
   };
 }));
