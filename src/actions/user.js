@@ -1,5 +1,7 @@
 import {
-    FETCH_USER, FETCH_USER_SUCCESS, FETCH_USER_FAILED
+    FETCH_USER,
+    FETCH_USER_SUCCESS,
+    FETCH_USER_FAILED
 } from './types';
 
 export function fetchUser() {
@@ -8,4 +10,3 @@ export function fetchUser() {
         promise: client => client.post('/user')
     };
 }
-

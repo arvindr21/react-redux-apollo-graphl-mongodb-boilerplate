@@ -1,6 +1,10 @@
 import {
-    SIGN_IN, SIGN_IN_SUCCESS, SIGN_IN_FAILED,
-    SIGN_UP, SIGN_UP_SUCCESS, SIGN_UP_FAILED,
+    SIGN_IN,
+    SIGN_IN_SUCCESS,
+    SIGN_IN_FAILED,
+    SIGN_UP,
+    SIGN_UP_SUCCESS,
+    SIGN_UP_FAILED,
     SIGN_OUT
 } from './types';
 import { fetchUser } from './user';
@@ -55,7 +59,7 @@ export function redirectToLoginWithMessage() {
     return (dispatch, getState) => {
         if (getState().routing.locationBeforeTransitions) {
             const currentPath = getState().routing.locationBeforeTransitions.pathname;
-            browserHistory.replace({pathname: '/login', state: {nextPathname: currentPath}});
+            browserHistory.replace({ pathname: '/login', state: { nextPathname: currentPath } });
         } else {
             browserHistory.push('/login');
         }

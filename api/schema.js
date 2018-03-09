@@ -17,7 +17,8 @@ type User {
 
 type Query {
   # Counter
-  users: [User]
+  users: [User],
+  count: Count
 }
 
 type Mutation {
@@ -44,28 +45,28 @@ schema {
 
 const rootResolvers = {
     Query: {
-      // count(ignored1, ignored2, context) {
-      //     return context.counterService.getCount();
-      // },
-      users(ignored1, ignored2, context) {
-        return context.usersService.allUsers()
-      }
+        count(ignored1, ignored2, context) {
+            return context.counterService.getCount();
+        },
+        users(ignored1, ignored2, context) {
+            return context.usersService.allUsers()
+        }
     },
-    // Mutation: {
-    //     addCount(_, { amount }, context) {
-    //         return context.counterService.addCount(amount)
-    //                 .then(() => context.counterService.getCount())
-    //     .then(count => {
-    //             pubsub.publish('countUpdated', count);
-    //         return count;
-    //     });
-    //     },
-    // },
-    // Subscription: {
-    //     countUpdated(amount) {
-    //         return amount;
-    //     }
-    // }
+    Mutation: {
+        addCount(_, { amount }, context) {
+            return context.counterService.addCount(amount)
+                .then(() => context.counterService.getCount())
+                .then(count => {
+                    pubsub.publish('countUpdated', count);
+                    return count;
+                });
+        },
+    },
+    Subscription: {
+        countUpdated(amount) {
+            return amount;
+        }
+    }
 };
 
 
